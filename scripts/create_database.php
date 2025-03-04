@@ -30,5 +30,48 @@ try {
 #drop tables
 $conn->query("DROP TABLE IF EXISTS NameTable, CourseTable");
 
-#Create tables
+#Create tables NameTable, and CourseTable
+
+$query = 
+"CREATE TABLE NameTable 
+(
+    StudentID varchar(9) CHECK (CHAR_LENGTH(StudentID) = 9 AND StudentID REGEXP '^[0-9]+$'),
+    StudentName varchar(50) NOT NULL,
+    PRIMARY KEY(StudentID)
+
+)";
+
+$conn->query($query); 
+
+$query = "CREATE TABLE CourseTable(
+    StudentID varchar(9),
+    courseCode varchar(5) not null,
+    test1 float not null,
+    test2 float not null,
+    test3 float not null,
+    finalExam float not null,
+
+    FOREIGN KEY (StudentID) REFERENCES NameTable(StudentID),
+    
+    CHECK (CHAR_LENGTH(courseCode) = 5 AND courseCode REGEXP '^[A-Z]{2}[0-9]{3}$'),
+
+    constraint testscores CHECK(
+        test1 between 0 and 100 and
+        test2 between 0 and 100 and
+        test3 between 0 and 100 and
+        finalExam between 0 and 100
+    ),
+
+    constraint pk PRIMARY KEY (StudentID, courseCode)
+ 
+)";
+
+$conn->query($query);
+
+echo "tables created"; 
+
+#Insert data into the tables using prepared statements
+
+$conn->close();
+
 ?>
