@@ -4,8 +4,6 @@
  * Author: Thomas De Sa
  */
 
-echo 
+echo $_POST["searchbar"]; 
 ?>
-
-<h1>searched</h1>
 
