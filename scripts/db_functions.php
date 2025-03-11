@@ -112,5 +112,5 @@ function modify_grades(string $id, string $coursecode, array $new_vals){
     }
 }
 
-modify_grades("627137015", "PS275", ["test1" => 60, "test2" =>45, "test3" => null, "finalExam" => null])
+
 ?>
