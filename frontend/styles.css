@@ -1,0 +1,36 @@
+:root{
+    --backgroundColor: rgba(197, 197, 197, 0.773); 
+    
+}
+
+body{
+    background-color: var(--backgroundColor);
+    
+}
+
+body, input, button{
+    font-family: fantasy;
+}
+input:focus{
+    outline: black;
+}
+input:active{
+    outline: black; 
+}
+
+.main-container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    height: 95vh;
+    width: 99vw; 
+}
+
+.row{
+    display: flex;
+    
+}
+.placeholder{
+    flex-grow: 2;
+}

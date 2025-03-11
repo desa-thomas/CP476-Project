@@ -7,11 +7,23 @@
 
     <!-- Main content -->
     <body>
-        <h1> CP476 Project</h1>
+        <div class="main-container">
 
-        <label for= "in">label for something</label> 
-        <input type="text" id = "in"> </input>
-        <input type = "submit" id = "sub" value="Submit something"></input>
+            <div class="placeholder"></div>
+
+            <div class="row">
+                <p>Search for Student by ID</p>
+            </div>
+            <div class="row">
+                <form action="/scripts/handle_form.php" method="post">
+                    <input id="searchbar" name ="searchbar" type = "text" placeholder="ID">
+                    <button type="submit">Search</button>
+                </form>
+            </div>
+            
+            <div class="placeholder"></div>
+
+        </div> 
     </body>
 
 </html>
