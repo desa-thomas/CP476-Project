@@ -133,18 +133,19 @@ function search_id(string $id){
     $regexp = '^'.$id;
 
     /** Search DB for all Ids that match the start of the inputted id */
-    $query = 'SELECT StudentID FROM NameTable WHERE StudentID REGEXP ?';
+    $query = 'SELECT StudentID, StudentName FROM NameTable WHERE StudentID REGEXP ?';
     $stmt = $conn->prepare($query);
     $stmt->bind_param("s", $regexp);
-    $stmt->execute(); 
+    $stmt->execute();
 
     $ids = [];
     $result = $stmt->get_result(); 
+    $conn->close();
     foreach($result as $row){
-        array_push($ids, $row["StudentID"]);
+        array_push($ids, $row);
     }
 
+    print_r($ids); 
     return $ids;
 }
-
 ?>
