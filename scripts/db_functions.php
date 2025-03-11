@@ -112,5 +112,36 @@ function modify_grades(string $id, string $coursecode, array $new_vals){
     }
 }
 
+/**
+ * Performs a search query for id
+ * 
+ * @param string $id - Id number to search for (len <= 9)
+ * @return array
+ */
+function search_id(string $id){
+
+    try{
+        $conn = new mysqli($_ENV["SERVER"], $_ENV["USERNAME"], $_ENV["PASSWORD"], $_ENV["DB_NAME"]); 
+    }catch(Exception $e){
+        echo $e->getMessage(); 
+        return [];
+    }
+
+    $regexp = '^'.$id;
+
+    /** Search DB for all Ids that match the start of the inputted id */
+    $query = 'SELECT StudentID FROM NameTable WHERE StudentID REGEXP ?';
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("s", $regexp);
+    $stmt->execute(); 
+
+    $ids = [];
+    $result = $stmt->get_result(); 
+    foreach($result as $row){
+        array_push($ids, $row["StudentID"]);
+    }
+
+    return $ids;
+}
 
 ?>
