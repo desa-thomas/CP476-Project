@@ -1,7 +1,7 @@
 <?php
 /*
 Date  : March 5 2025
-Author: Thomas De Sa
+Authors: Thomas De Sa,
 
 Functions to query the CP476-Project Database.
 
@@ -113,13 +113,16 @@ function modify_grades(string $id, string $coursecode, array $new_vals){
 }
 
 /**
- * Performs a search query for id
+ * Performs a search query for id, returns array of matching ids
  * 
  * @param string $id - Id number to search for (len <= 9)
- * @return array
+ * @return array     - Array of Student IDs matching search query
  */
 function search_id(string $id){
 
+    if(strlen($id) > 9 ){
+        return [];
+    }
     try{
         $conn = new mysqli($_ENV["SERVER"], $_ENV["USERNAME"], $_ENV["PASSWORD"], $_ENV["DB_NAME"]); 
     }catch(Exception $e){
