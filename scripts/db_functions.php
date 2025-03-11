@@ -47,7 +47,7 @@ function delete_course(string $id, string $coursecode){
  * 
  * @param string $id         9 digit Student ID
  * @param string $coursecode Course code for the class for which grade to udpate (cciii)
- * @param array(float)  $new_vals  Associative array of updated values e.g., 
+ * @param array $new_vals  Associative array of updated values (array of floats or null) e.g., 
  *                           ["test1" => updated_value,
  *                            "test2" => updated value,
  *                            "test3" => updated value,
@@ -59,10 +59,10 @@ function delete_course(string $id, string $coursecode){
  * @return array(bool, string) $modified  [column_modified, message]
  */
 function modify_grades(string $id, string $coursecode, array $new_vals){
-    $key_template = ["test1", "test2", "test3", "finalExam"]
+    $key_template = ["test1", "test2", "test3", "finalExam"];
 
     if(array_keys($new_vals) != $key_template){
-        return [false, "Associative array keys should have format:\n". '["test1", "test2", "test3", "finalExam"]']
+        return [false, "Associative array keys should have format:\n". '["test1", "test2", "test3", "finalExam"]'];
     }
     try{
         $conn = new mysqli($_ENV["SERVER"], $_ENV["USERNAME"], $_ENV["PASSWORD"], $_ENV["DB_NAME"]); 
@@ -70,10 +70,47 @@ function modify_grades(string $id, string $coursecode, array $new_vals){
         return [false, $e->getMessage()];
     }
 
+    $query = "UPDATE CourseTable SET "; 
+    $values = [];
+    $types = "";
+
+    /**Iterate over values given, append all updated grades to a list */
     foreach($new_vals as $key=> $value){
-            
+        if($value != null){
+            /** Update Query for every value changed, and keep track of values to be updated */
+            $query.="$key = ?, ";
+            array_push($values, $value); 
+            $types .= "d"; 
+        }
     }
-    return 
+    /** If no values are given to update return */
+    if (count($values) == 0 ){
+        return [false, "No values were updated"]; 
+    }
+
+    /** Add WHERE clause to query */
+    $query = substr($query, 0, -2); 
+    $query .= " WHERE StudentID = ? AND courseCode = ?";
+    array_push($values, $id, $coursecode);
+    $types .= "ss"; 
+
+    /** Create prepared statemetn */
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param($types, ...$values); 
+
+    $stmt->execute();
+
+    /**Rows affected by MODIFY statement */
+    $affected_rows = $conn->affected_rows;
+    $conn->close();
+
+    if ($affected_rows){
+        return [true, "Grades updated"]; 
+    }
+    else{
+        return [false, "No rows affected ... Check student ID and Course"]; 
+    }
 }
 
+modify_grades("627137015", "PS275", ["test1" => 60, "test2" =>45, "test3" => null, "finalExam" => null])
 ?>
