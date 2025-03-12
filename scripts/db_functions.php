@@ -115,12 +115,12 @@ function modify_grades(string $id, string $coursecode, array $new_vals){
 /**
  * Performs a search query for id, returns array of matching ids
  * 
- * @param string $id - Id number to search for (len <= 9)
+ * @param string $search_str - search input (id or nae)
  * @return array     - Array of Student IDs matching search query
  */
-function search_id(string $id){
+function search_students(string $search_str){
 
-    if(strlen($id) > 9 ){
+    if(strlen($search_str) > 9 ){
         return [];
     }
     try{
@@ -130,12 +130,13 @@ function search_id(string $id){
         return [];
     }
 
-    $regexp = '^'.$id;
+    $idQuery= '^'.$search_str;
+    $nameQuery = "%".$search_str."%";
 
     /** Search DB for all Ids that match the start of the inputted id */
-    $query = 'SELECT StudentID, StudentName FROM NameTable WHERE StudentID REGEXP ?';
+    $query = 'SELECT StudentID, StudentName FROM NameTable WHERE (StudentID REGEXP ? OR studentname LIKE ?)';
     $stmt = $conn->prepare($query);
-    $stmt->bind_param("s", $regexp);
+    $stmt->bind_param("ss", $idQuery, $nameQuery);
     $stmt->execute();
 
     $ids = [];
@@ -148,4 +149,6 @@ function search_id(string $id){
     print_r($ids); 
     return $ids;
 }
+
+search_students("4"); 
 ?>
