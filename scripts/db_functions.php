@@ -146,9 +146,6 @@ function search_students(string $search_str){
         array_push($ids, $row);
     }
 
-    print_r($ids); 
     return $ids;
 }
-
-search_students("4"); 
 ?>
