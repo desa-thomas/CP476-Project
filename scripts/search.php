@@ -26,12 +26,15 @@ echo "<script>let search_results = $json</script>";
 </head>
 
 <body>
-    <div class = "header">
+    <div class="header">
         <h1>Search Results</h1>
     </div>
 
-    <div class="student-card">
-        <h3 class = "student-id">123456789</h3>
-        <h3 class = "student-name">Name</h3>
+    <div id="search-results-container">
+        <div class="student-card">
+            <h3 class="student-id">123456789</h3>
+            <h3 class="student-name">Name</h3>
+        </div>
     </div>
+
 </body>
