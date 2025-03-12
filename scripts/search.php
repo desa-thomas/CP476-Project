@@ -27,7 +27,7 @@ echo "<script>let search_results = $json</script>";
 
 <body>
     <div class="header">
-        <h1>Search Results</h1>
+        <h1 id="title">Search Results</h1>
     </div>
 
     <div id="search-results-container">

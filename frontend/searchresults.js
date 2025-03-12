@@ -6,9 +6,11 @@
  */
 
 onload = ()=>{
+    
+    document.getElementById("title").innerHTML = `${search_results.length} Search Results`
     //search_results from search.php
     for(row of search_results){
-        console.log(row)
+        
         let studentcard = create_student_card(row.StudentID, row.StudentName)
         document.getElementById("search-results-container").appendChild(studentcard)
     }
