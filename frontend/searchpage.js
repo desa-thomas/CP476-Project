@@ -6,8 +6,15 @@
  */
 onload = ()=>{
 
-    console.log("loaded")
+    document.getElementById("searchbar").value = ""
     document.getElementById("search-button").onclick = validate_search
+
+    //Enter key presses search button
+    document.getElementById("searchbar").addEventListener("keypress", (e)=>{
+        if(e.key === "Enter"){
+            document.getElementById("search-button").click()
+        }
+    })
 }
 
 function validate_search(){
