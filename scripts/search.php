@@ -9,11 +9,11 @@ Search for Student by ID in DB, then return HTML page displaying those results
 <?php include("db_functions.php");
 
 //Get search value from URL parameters
-$id = $_GET["id"];
-$ids = search_id($id);
+$search_input = $_GET["search"];
+$search_results = search_students($search_input);
 
 //pass search results to javascript for dynamic loading of content
-$json = json_encode($ids);
+$json = json_encode($search_results);
 echo "<script>let search_results = $json</script>";
 ?>
 
@@ -24,3 +24,14 @@ echo "<script>let search_results = $json</script>";
     <link rel="stylesheet" href="../frontend/styles.css">
     <script src="../frontend/searchresults.js"></script>
 </head>
+
+<body>
+    <div class = "header">
+        <h1>Search Results</h1>
+    </div>
+
+    <div class="student-card">
+        <h3 class = "student-id">123456789</h3>
+        <h3 class = "student-name">Name</h3>
+    </div>
+</body>

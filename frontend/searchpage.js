@@ -11,12 +11,12 @@ onload = ()=>{
 }
 
 function validate_search(){
-    let id = document.getElementById("searchbar").value
+    let search_input = document.getElementById("searchbar").value
 
     /**TODO Validate search */
 
-    console.log(`/scripts/search.php?id=${id}`)
-    window.location = `/scripts/search.php?id=${id}`
+    console.log(`/scripts/search.php?search=${search_input}`)
+    window.location = `/scripts/search.php?search=${search_input}`
 
     return
 }
