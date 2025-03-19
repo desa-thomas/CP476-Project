@@ -9,7 +9,13 @@ from search.php -->
 <!DOCTYPE html>
 
 <?php
-include("../scripts/db_functions.php")
+include("../scripts/db_functions.php"); 
 
-$id = $_GET["id"]
+$id = $_GET["id"];
+$student_records = get_student_grades($id);
+
+$json = json_encode($student_records); 
+echo "<script>let student_records = $json</script>"; 
+
+echo $id; 
 ?>

@@ -8,6 +8,8 @@
 onload = ()=>{
     
     document.getElementById("title").innerHTML = `${search_results.length} Search Results`
+    document.getElementById("title").onclick = ()=>{window.location = '../index.html'}
+
     //search_results from search.php
     for(row of search_results){
         
