@@ -3,14 +3,19 @@
     
 }
 
+/*
+General styles
+*/
 body{
     background-color: var(--backgroundColor);
-    
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 body, input, button{
     font-family: fantasy;
 }
+
 input:focus{
     outline: black;
 }
@@ -35,7 +40,9 @@ input:active{
     flex-grow: 2;
 }
 
-/*search.php styles*/
+/*
+search.php styles
+*/
 .student-card{
     display: flex;
     flex-direction: row;
@@ -48,4 +55,12 @@ input:active{
 }
 .student-id, .student-name{
     margin: 0px; 
+    width: 200px;
 }
+
+.header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+

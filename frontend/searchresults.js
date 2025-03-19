@@ -14,6 +14,17 @@ onload = ()=>{
         let studentcard = create_student_card(row.StudentID, row.StudentName)
         document.getElementById("search-results-container").appendChild(studentcard)
     }
+
+    //Setup searchbar
+    document.getElementById("searchbar").value = ""
+    document.getElementById("search-button").onclick = search
+
+    //Enter key presses search button
+    document.getElementById("searchbar").addEventListener("keypress", (e)=>{
+        if(e.key === "Enter"){
+            document.getElementById("search-button").click()
+        }
+    })
 }
 
 /**
@@ -33,10 +44,25 @@ function create_student_card(id, name){
     let nameElement = document.createElement("h3")
 
     idElement.innerHTML = id
+    idElement.className = "student-id"
+
     nameElement.innerHTML = name
+    nameElement.className = "student-name"
 
     studentcard.appendChild(idElement)
     studentcard.appendChild(nameElement)
 
     return studentcard
+}
+
+/**
+ * Get value from search bar and go to searchresults page (search.php)
+ * @returns 
+ */
+function search(){
+    let search_input = document.getElementById("searchbar").value
+
+    window.location = `/scripts/search.php?search=${search_input}`
+
+    return
 }

@@ -7,7 +7,7 @@
 onload = ()=>{
 
     document.getElementById("searchbar").value = ""
-    document.getElementById("search-button").onclick = validate_search
+    document.getElementById("search-button").onclick = search
 
     //Enter key presses search button
     document.getElementById("searchbar").addEventListener("keypress", (e)=>{
@@ -17,12 +17,13 @@ onload = ()=>{
     })
 }
 
-function validate_search(){
+/**
+ * Get value from search bar and go to searchresults page (search.php)
+ * @returns 
+ */
+function search(){
     let search_input = document.getElementById("searchbar").value
 
-    /**TODO Validate search */
-
-    console.log(`/scripts/search.php?search=${search_input}`)
     window.location = `/scripts/search.php?search=${search_input}`
 
     return
