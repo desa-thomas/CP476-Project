@@ -2,7 +2,7 @@
  * Date: March 11 2025
  * Authors: Thomas De Sa,
  * 
- * Client Script for Search results page
+ * Client Script for Search results page (search.php)
  */
 
 onload = ()=>{
@@ -40,8 +40,8 @@ function create_student_card(id, name){
 
     studentcard.className = "student-card"
     
-    let idElement = document.createElement("h3")
-    let nameElement = document.createElement("h3")
+    let idElement = document.createElement("h4")
+    let nameElement = document.createElement("h4")
 
     idElement.innerHTML = id
     idElement.className = "student-id"
@@ -51,7 +51,8 @@ function create_student_card(id, name){
 
     //for hover and click
     studentcard.classList.add("search-result")
-    studentcard.onclick = ()=>{alert("clicked")}
+    studentcard.classList.add("border")
+    studentcard.onclick = ()=>{get_student(id)}
 
     studentcard.appendChild(idElement)
     studentcard.appendChild(nameElement)
@@ -77,5 +78,6 @@ function search(){
  * @param id - Student Id to get
  */
 function get_student(id){
-    
+    window.location = `/pages/student.php?id=${id}` 
+    return 
 }

@@ -26,21 +26,30 @@ echo "<script>let search_results = $json</script>";
 </head>
 
 <body>
-    <div class="header">
-        <h1 id="title">Search Results</h1>
-        <div class="placeholder"></div>
+    <div class="content">
+        <div class="header">
+            <h2 id="title">Search Results</h2>
+            <div class="placeholder"></div>
 
-        <div>
-            <input id="searchbar" type="text" placeholder="Student Id or name">
-            <button id="search-button">Search</button>
+            <div>
+                <input id="searchbar" type="text" placeholder="Student Id or name">
+                <button id="search-button">Search</button>
+            </div>
         </div>
+
+        <hr>
+
+        <div id="search-results-container">
+            <div class="student-card student-card-header">
+                <h3 class="student-id">ID</h3>
+                <h3 class="student-name">Name</h3>
+            </div>
+        </div>
+
     </div>
 
-    <div id="search-results-container">
-        <div class="student-card">
-            <h3 class="student-id">ID</h3>
-            <h3 class="student-name">Name</h3>
-        </div>
+    <hr>
+    <div class="content">
+        <p>CP476 2025</p>
     </div>
-
 </body>
