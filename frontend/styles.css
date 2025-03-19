@@ -64,3 +64,6 @@ search.php styles
     align-items: center;
 }
 
+.search-result:hover{
+    background-color: rgba(0, 0, 255, 0.244);
+}

@@ -49,6 +49,10 @@ function create_student_card(id, name){
     nameElement.innerHTML = name
     nameElement.className = "student-name"
 
+    //for hover and click
+    studentcard.classList.add("search-result")
+    studentcard.onclick = ()=>{alert("clicked")}
+
     studentcard.appendChild(idElement)
     studentcard.appendChild(nameElement)
 
