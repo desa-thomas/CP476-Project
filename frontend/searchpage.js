@@ -2,7 +2,7 @@
  * Date: March 11 2025 
  * Authors: Thomas De Sa, 
  * 
- * Client script for the search page
+ * Client script for the search page (index.html at the moment)
  */
 onload = ()=>{
 
