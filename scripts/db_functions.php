@@ -176,7 +176,7 @@ function get_student_grades(string $id){
         array_push($courses, $row); 
     }
     
-    return $courses 
+    return $courses ;
 }
 
 ?>
