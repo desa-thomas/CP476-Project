@@ -120,9 +120,6 @@ function modify_grades(string $id, string $coursecode, array $new_vals){
  */
 function search_students(string $search_str){
 
-    if(strlen($search_str) > 9 ){
-        return [];
-    }
     try{
         $conn = new mysqli($_ENV["SERVER"], $_ENV["USERNAME"], $_ENV["PASSWORD"], $_ENV["DB_NAME"]); 
     }catch(Exception $e){
@@ -148,4 +145,38 @@ function search_students(string $search_str){
 
     return $ids;
 }
+
+/**
+ * Get the grades stored in coursetable for student with id
+ * 
+ * @param string $id      - Student's 9 digit id
+ * @return array $courses - Return 2D array containing all course grades for studnet    
+ *                          (every index contains an associative array of course grades)
+ */
+function get_student_grades(string $id){
+    // Connect to db
+    try{
+        $conn = new mysqli($_ENV["SERVER"], $_ENV["USERNAME"], $_ENV["PASSWORD"], $_ENV["DB_NAME"]); 
+    }catch(Exception $e){
+        echo $e->getMessage(); 
+        return [];
+    }
+
+    //prepare and execute query
+    $query = "SELECT * FROM CourseTable WHERE StudentID = ?"; 
+    $stmt = $conn->prepare($query); 
+    $stmt->bind_param("s", $id);
+    $stmt->execute();
+    $result = $stmt->get_result(); 
+    $conn->close();
+
+    $courses = [];
+    //Each row is a course that student is taking, append it to courses array
+    foreach($result as $row){
+        array_push($courses, $row); 
+    }
+    
+    return $courses 
+}
+
 ?>
