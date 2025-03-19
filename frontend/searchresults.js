@@ -60,7 +60,7 @@ function create_student_card(id, name){
 }
 
 /**
- * Get value from search bar and go to searchresults page (search.php)
+ * Get value from search bar and go to search result page (search.php?search={})
  * @returns 
  */
 function search(){
@@ -69,4 +69,13 @@ function search(){
     window.location = `/scripts/search.php?search=${search_input}`
 
     return
+}
+
+/**
+ * On click function for student search results card. Takes you to view student pages
+ * 
+ * @param id - Student Id to get
+ */
+function get_student(id){
+
 }
