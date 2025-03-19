@@ -1,13 +1,15 @@
 :root{
-    --backgroundColor: rgba(197, 197, 197, 0.773); 
-    
+    --primaryColor: rgba(197, 197, 197, 0.773); 
+    --secondaryColor: green; 
+    --accentColor:  rgba(0, 0, 255, 0.244);
+    --hoverColor: rgba(0, 0, 255, 0.244);
 }
 
 /*
 General styles
 */
 body{
-    background-color: var(--backgroundColor);
+    background-color: var(--primaryColor);
     padding-left: 20px;
     padding-right: 20px;
 }
@@ -65,5 +67,5 @@ search.php styles
 }
 
 .search-result:hover{
-    background-color: rgba(0, 0, 255, 0.244);
+    background-color: var(--hoverColor); 
 }
