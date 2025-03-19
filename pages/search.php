@@ -6,7 +6,7 @@ Search for Student by ID in DB, then return HTML page displaying those results
 -->
 <!DOCTYPE html>
 
-<?php include("db_functions.php");
+<?php include("../scripts/db_functions.php");
 
 //Get search value from URL parameters
 $search_input = $_GET["search"];

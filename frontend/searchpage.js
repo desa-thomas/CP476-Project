@@ -24,7 +24,7 @@ onload = ()=>{
 function search(){
     let search_input = document.getElementById("searchbar").value
 
-    window.location = `/scripts/search.php?search=${search_input}`
+    window.location = `/pages/search.php?search=${search_input}`
 
     return
 }
