@@ -8,14 +8,50 @@ Page is accessed by clicking on the student card of a search result
 from search.php -->
 <!DOCTYPE html>
 
-<?php
-include("../scripts/db_functions.php"); 
+<!-- Include the script tags to the head -->
 
-$id = $_GET["id"];
-$student_records = get_student_grades($id);
+<head>
+    <?php
+    include("../scripts/db_functions.php");
 
-$json = json_encode($student_records); 
-echo "<script>let student_records = $json</script>"; 
+    $id = $_GET["id"];
+    //get student records and name
+    $student_records = get_student_grades($id);
+    $name = trim(search_students($id)[0]["StudentName"]);
 
-echo $id; 
-?>
+    $json = json_encode($student_records);
+
+    //pass the student records and name to the javascript
+    echo "<script>
+    let student_records = $json;
+    let id = $id; 
+    let studentName = '$name';</script>";
+    ?>
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../frontend/styles.css">
+    <script src="../frontend/studentRecords.js"></script>
+</head>
+
+<body>
+    <div class="content">
+        <!-- header: ID - name     searchbar -->
+        <div class="header">
+            <h2 id="title">ID</h2>
+            <div class="placeholder"></div>
+            <div>
+                <input id="searchbar" type="text" placeholder="Student Id or name">
+                <button id="search-button">Search</button>
+            </div>
+        </div>
+        <hr>
+
+        <div id="search-results-container">
+
+
+        </div>
+
+    </div>
+    </div>
+
+</body>

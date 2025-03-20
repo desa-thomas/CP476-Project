@@ -116,7 +116,7 @@ search.php styles
     border-bottom: 1px solid var(--border-color);
 }
 
-.student-id, .student-name{
+.card-content{
     margin: 0px; 
     width: 200px;
 }
@@ -127,7 +127,7 @@ search.php styles
     align-items: center;
 }
 
-.search-result:hover{
+.search-result:hover, .course-grade:hover{
     background-color: var(--secondaryColor); 
 }
 
