@@ -46,8 +46,11 @@ function search() {
  * @return {HTMLDivElement}      - Div grade card containing all grades for course
  */
 function create_grade_card(course_grades){
-    
     let top_div = document.createElement("div")
+
+    //calculate final grade
+    final_grade = course_grades.test1*0.2 + course_grades.test2*0.2 + course_grades.test3*0.2  + course_grades.finalExam*0.4
+    final_grade = Math.round(final_grade *100)/100
 
     //create course title card
     let course_title = document.createElement("div")
@@ -55,15 +58,20 @@ function create_grade_card(course_grades){
     let title = document.createElement("h3")
     title.className = "card-content"
     title.innerHTML = course_grades.courseCode
+
+    final_grade_card = document.createElement("h3")
+    final_grade_card.className = "card-content"
+    final_grade_card.innerHTML = `Final Grade - ${final_grade}%`
+
     course_title.appendChild(title)
+    course_title.appendChild(final_grade_card)
 
     top_div.appendChild(course_title)
 
+    //iterate over course grades and create cards for them  
     let test_names = [0, 0, "Test 1", "Test 2", "Test 3", "Final Exam"]
-    //iterate over course grades and create cards for them
     keys = Object.keys(course_grades)
     for (let i = 2; i < keys.length; i ++){
-        console.log(course_grades[keys[i]])
         let test_card = document.createElement("div")
         test_card.className = "student-card course-grade border"
 
