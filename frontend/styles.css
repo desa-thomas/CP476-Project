@@ -88,7 +88,7 @@ button:active{
 /*
 search.php styles
 */
-#title:hover{
+.click:hover{
     color: var(--secondaryClicked); 
 }
 #search-results-container{

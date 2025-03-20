@@ -7,7 +7,7 @@
 onload = () => {
   
     
-  document.getElementById("title").innerHTML = `${id} - ${studentName}`;
+  document.getElementById("title").innerHTML = `${studentName} - ${id}`;
   
   for (row of student_records){
     let course_card = create_grade_card(row)
@@ -91,5 +91,6 @@ function create_grade_card(course_grades){
         top_div.appendChild(test_card)
     }
 
+    //return card containing class grades
     return top_div
 }
