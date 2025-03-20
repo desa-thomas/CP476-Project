@@ -46,10 +46,10 @@ function create_student_card(id, name){
     let nameElement = document.createElement("h4")
 
     idElement.innerHTML = id
-    idElement.className = "student-id"
+    idElement.className = "card-content"
 
     nameElement.innerHTML = name
-    nameElement.className = "student-name"
+    nameElement.className = "card-content"
 
     //for hover and click
     studentcard.classList.add("search-result")

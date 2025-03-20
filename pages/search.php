@@ -41,8 +41,8 @@ echo "<script>let search_results = $json</script>";
 
         <div id="search-results-container">
             <div class="student-card student-card-header">
-                <h3 class="student-id">ID</h3>
-                <h3 class="student-name">Name</h3>
+                <h3 class="card-content">ID</h3>
+                <h3 class="card-content">Name</h3>
             </div>
         </div>
 
