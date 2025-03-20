@@ -34,7 +34,7 @@ from search.php -->
 </head>
 
 <body>
-    <div class="content">
+    <div class="content main">
         <!-- header: ID - name     searchbar -->
         <div class="header">
             <h2 id="title">ID</h2>

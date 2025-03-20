@@ -7,7 +7,7 @@
 
 onload = ()=>{
     
-    document.getElementById("title").innerHTML = `${search_results.length} Search Results`
+    document.getElementById("title").innerHTML = `${search_results.length} Search Results for "${search_input}"`
     document.getElementById("title").onclick = ()=>{window.location = '../index.html'}
 
     //search_results from search.php

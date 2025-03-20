@@ -54,7 +54,7 @@ function create_grade_card(course_grades){
 
     //create course title card
     let course_title = document.createElement("div")
-    course_title.className = "student-card student-card-header"
+    course_title.className = "student-card student-card-header course"
     let title = document.createElement("h3")
     title.className = "card-content"
     title.innerHTML = course_grades.courseCode
