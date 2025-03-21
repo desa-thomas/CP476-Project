@@ -13,6 +13,8 @@ from search.php -->
 <head>
     <?php
     include("../scripts/db_functions.php");
+    include("../scripts/auth_check.php");
+    check_auth();
 
     $id = $_GET["id"];
     //get student records and name
@@ -42,6 +44,7 @@ from search.php -->
             <div>
                 <input id="searchbar" type="text" placeholder="Student Id or name">
                 <button id="search-button">Search</button>
+                <button onclick="window.location.href='../scripts/logout.php'" style="width: 100px;">Logout</button>
             </div>
         </div>
         <hr>

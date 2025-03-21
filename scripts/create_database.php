@@ -37,7 +37,7 @@ try {
 }
 
 #drop tables
-$conn->query("DROP TABLE IF EXISTS NameTable, CourseTable");
+$conn->query("DROP TABLE IF EXISTS NameTable, CourseTable, Users");
 
 #Create tables NameTable, and CourseTable
 $query =
@@ -73,6 +73,23 @@ $query = "CREATE TABLE CourseTable(
 )";
 
 $conn->query($query);
+
+# Create Users table for authentication
+$query = "CREATE TABLE Users(
+    id INT(9) AUTO_INCREMENT,
+    username VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    PRIMARY KEY(id)
+)";
+
+$conn->query($query);
+
+# Insert default admin user (password will be hashed in production)
+$default_username = 'admin';
+$default_password = password_hash('admin123', PASSWORD_DEFAULT);
+$stmt = $conn->prepare("INSERT INTO Users (username, password) VALUES (?, ?)");
+$stmt->bind_param("ss", $default_username, $default_password);
+$stmt->execute();
 
 echo "Tables Created...\n";
 
