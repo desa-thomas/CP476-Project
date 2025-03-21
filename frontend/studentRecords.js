@@ -1,19 +1,25 @@
 /**
  * Date: March 19 2025
- * Author: Thomas De Sa
+ * Authors: Thomas De Sa,
  *
  * Client script for the student records page (student.php)
  */
 onload = () => {
   
-    
+  //set title
   document.getElementById("title").innerHTML = `${studentName} - ${id}`;
+  document.getElementById("title").onclick = ()=>{window.location = '../index.html'}
+
   
+  //create course card for each course student completed
   for (row of student_records){
     let course_card = create_grade_card(row)
-
     document.getElementById("search-results-container").appendChild(course_card)
   }
+
+  //close modify course when clicking off
+  document.getElementById("blur").onclick = close_modify_course
+  document.getElementById("x-close").onclick = close_modify_course
 
   //Setup searchbar
   document.getElementById("searchbar").value = "";
@@ -40,6 +46,8 @@ function search() {
 }
 
 /**
+ * Create div contianing the test grades for a given class
+ * 
  * @param {object} course_grades - associative array of course grades
  *                                 keys: "courseCode", "test1", "test2", "test3", "finalExam"
  * 
@@ -91,6 +99,20 @@ function create_grade_card(course_grades){
         top_div.appendChild(test_card)
     }
 
+    //clicking course title toggles modify course
+    course_title.onclick = ()=>{modify_course()}
+
     //return card containing class grades
     return top_div
+}
+
+
+function modify_course(){
+  document.getElementById("modify-course").hidden = false
+  document.getElementById("blur").hidden = false
+}
+
+function close_modify_course(){
+  document.getElementById("modify-course").hidden = true
+  document.getElementById("blur").hidden = true
 }

@@ -1,3 +1,6 @@
+/* 
+Global styles for all pages
+*/
 :root{
     --primaryColor: rgba(20, 20, 20, 0.8);
     --content-background: rgba(100, 100, 100, 0.548);
@@ -36,29 +39,23 @@ body
     background-color: var(--primaryColor);
 }
 
-.content{
-    padding: 25px 25px;
-    margin: 20px 15px;
-}
-.main{
-    background-color: var(--content-background);
-    border-radius: 10px;
-}
-
 body, input, button{
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Helvetica;
     color: var(--font-color); 
 }
+
 input,button{
     font-size: 14px;
 }
 
 input:focus{
-    outline: black;
+    outline: 3px solid  #7fdbcdb6;
 }
+
 input:active{
     outline: black; 
 }
+
 input{
     color: white;
     border-radius: 10px;
@@ -68,9 +65,11 @@ input{
     border:none;
     width: 125px;
 }
+
 ::placeholder{
     text-align: center;
 }
+
 button{
     outline: none;
     border: 1px solid var(--border-color); 
@@ -79,12 +78,28 @@ button{
     padding: 2px 5px; 
     width: 75px;
 }
+
 button:hover{
     background-color: var(--secondaryColor);
 }
+
 button:active{
     background-color: var(--secondaryClicked);
 }
+
+/* General classes */
+.content{
+    padding: 25px 25px;
+    margin: 20px 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.main{
+    background-color: var(--content-background);
+    border-radius: 10px;
+}
+
 .main-container{
     display: flex;
     align-items: center;
@@ -115,6 +130,8 @@ search.php styles
     background-color: var(--div-color);
     margin-top: 10px;
 }
+
+/*Card styles*/
 .student-card{
     display: flex;
     flex-direction: row;
@@ -153,7 +170,54 @@ hr{
     margin-bottom: 20px;
 }
 
-.search-result:hover, .course-grade:hover{
+.search-result:hover, .course:hover{
     background-color: var(--secondaryColor); 
 }
 
+/*Modify course Styles*/
+
+/* Modify course popup window */
+.modify-course{
+    --w: 60%;
+    --h: 70%;
+
+    background-color: var(--font-color);
+    
+    /* Overlay  */
+    width: var(--w);
+    height: var(--h); 
+
+    z-index: 2;
+    position:absolute;
+    
+    top: calc((var(--h) - 40px)/4); 
+    left:50%;
+
+    margin-left: calc((var(--w) + 40px)/2 *-1);
+
+    border-radius: 25px;
+    padding: 20px; 
+
+    border: 1px solid var(--border-color);
+}
+
+/* Blur filter for background when modifying a course */
+.blur{
+    z-index: 1;
+    position:absolute;
+    top:0px; 
+    left:0px; 
+
+    height: 100%;
+    width: 100%;
+
+    backdrop-filter: blur(3px);
+}
+
+#x-close{
+    fill: var(--primaryColor); 
+}
+
+#x-close:hover{
+    fill:var(--accentColor); 
+}

@@ -37,9 +37,9 @@ from search.php -->
     <div class="content main">
         <!-- header: ID - name     searchbar -->
         <div class="header">
-            <h2 id="title">ID</h2>
+            <h2 id="title" class="click">ID</h2>
             <div class="placeholder"></div>
-            <div>
+            <div class="search-group">
                 <input id="searchbar" type="text" placeholder="Student Id or name">
                 <button id="search-button">Search</button>
             </div>
@@ -47,11 +47,22 @@ from search.php -->
         <hr>
 
         <div id="search-results-container">
-
-
         </div>
+    </div>
 
-    </div>
-    </div>
 
 </body>
+
+<div id="modify-course" class="modify-course" hidden>
+    <div class="row">
+        <div class="placeholder"></div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="25px" height="25px"
+            viewBox="0 0 384 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+            <path id="x-close"
+                d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
+        </svg>
+    </div>
+
+
+</div>
+<div id="blur" class="blur" hidden></div>
