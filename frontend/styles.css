@@ -27,7 +27,7 @@ General styles
 a{
     color: var(--accentColor)
 }
-h2, h1{
+h2, h1, h3, h4{
     margin: 0px; 
 }
 h4{
@@ -48,12 +48,8 @@ input,button{
     font-size: 14px;
 }
 
-input:focus{
+input:focus, input:hover{
     outline: 3px solid  #7fdbcdb6;
-}
-
-input:active{
-    outline: black; 
 }
 
 input{
@@ -94,6 +90,7 @@ button:active{
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
 .main{
     background-color: var(--content-background);
@@ -114,7 +111,7 @@ button:active{
     gap: 5px; 
 }
 .placeholder{
-    flex-grow: 2;
+    flex-grow: 3;
 }
 
 /*
@@ -129,6 +126,7 @@ search.php styles
     border-bottom: none;
     background-color: var(--div-color);
     margin-top: 10px;
+    width: 80vw;
 }
 
 /*Card styles*/
@@ -137,7 +135,7 @@ search.php styles
     flex-direction: row;
     align-items: center;
     padding: 10px 20px; 
-    gap: 15px; 
+    gap: 50px; 
 }
 
 .student-card-header{
@@ -146,9 +144,7 @@ search.php styles
     border-bottom: 1px solid var(--border-color);
 }
 .course{
-    padding-top: 20px;
-    padding-bottom: 20px;
-
+    padding: 15px 20px; 
 }
 
 .border{
@@ -158,12 +154,24 @@ search.php styles
 .card-content{
     margin: 0px; 
     width: 200px;
+    
+}
+.id{width:150px;}
+.course-name-container{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0px;
+
+}
+.course-name-container h4{
+    width: 80px;
 }
 
 .header{
     display: flex;
     flex-direction: row;
     align-items: center;
+    align-self: stretch;
     padding-bottom: 5px;
 }
 hr{

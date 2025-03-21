@@ -12,10 +12,21 @@ Search for Student by ID in DB, then return HTML page displaying those results
 $search_input = $_GET["search"];
 $search_results = search_students($search_input);
 
+//Get the course codes for all student results
+$student_courses = [];
+foreach($search_results as $row){
+    $courses = get_student_courses($row["StudentID"]);
+    array_push($student_courses, $courses);
+}
+
 //pass search results to javascript for dynamic loading of content
 $json = json_encode($search_results);
-echo "<script>let search_results = $json;
-let search_input = '$search_input';</script>";
+$student_courses_json = json_encode($student_courses); 
+
+echo "<script>
+let search_results = $json;
+let search_input = '$search_input';
+let courses = $student_courses_json;</script>";
 ?>
 
 
@@ -42,15 +53,11 @@ let search_input = '$search_input';</script>";
 
         <div id="search-results-container">
             <div class="student-card student-card-header">
-                <h2 class="card-content">ID</h2>
+                <h2 class="card-content id">ID</h2>
                 <h2 class="card-content">Name</h2>
+                <h2 class="card-content">Courses</h2>
             </div>
         </div>
 
-    </div>
-
-    <hr>
-    <div class="content">
-        <p>CP476 2025</p>
     </div>
 </body>

@@ -6,15 +6,17 @@
  */
 
 onload = ()=>{
-    
+
     document.getElementById("title").innerHTML = `${search_results.length} Search Results for "${search_input}"`
     document.getElementById("title").onclick = ()=>{window.location = '../index.html'}
 
     //search_results from search.php
+    let i = 0
     for(row of search_results){
         
-        let studentcard = create_student_card(row.StudentID, row.StudentName)
+        let studentcard = create_student_card(row.StudentID, row.StudentName, courses[i])
         document.getElementById("search-results-container").appendChild(studentcard)
+        i++
     }
 
     //Setup searchbar
@@ -33,24 +35,33 @@ onload = ()=>{
  * Create a student search result card based on student ID and name
  * @param {string} id   - 9 digit student ID 
  * @param {string} name - Student full name
+ * @param {object} courses - array of course codes student is taking
  * 
  * @return {HTMLDivElement} studentcard - Div element to be added to doc tree
  */
-function create_student_card(id, name){
-
+function create_student_card(id, name, courses){
     let studentcard = document.createElement("div")
 
     studentcard.className = "student-card"
     
     let idElement = document.createElement("h4")
     let nameElement = document.createElement("h4")
+    let courseElement = document.createElement("div")
+    courseElement.className = "course-name-container"
 
     idElement.innerHTML = id
-    idElement.className = "card-content"
+    idElement.className = "card-content id"
 
     nameElement.innerHTML = name
     nameElement.className = "card-content"
 
+    
+    for (course of courses){
+        let h4 = document.createElement("h4")
+        h4.innerHTML = course
+        courseElement.appendChild(h4)
+    }
+    
     //for hover and click
     studentcard.classList.add("search-result")
     studentcard.classList.add("border")
@@ -58,6 +69,7 @@ function create_student_card(id, name){
 
     studentcard.appendChild(idElement)
     studentcard.appendChild(nameElement)
+    studentcard.appendChild(courseElement)
 
     return studentcard
 }
