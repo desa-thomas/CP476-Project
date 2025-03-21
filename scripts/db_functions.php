@@ -179,4 +179,41 @@ function get_student_grades(string $id){
     return $courses ;
 }
 
+
+/**
+ * 
+ * @param string $id      - id of student whose courses to search for
+ * @return array $courses - array of course codes of courses student is taking
+ */
+function get_student_courses(string $id){
+    
+    if (strlen($id) != 9){
+        echo "ID must be 9 digits long"; 
+        return [];
+    }
+
+    // Connect to db
+    try{
+        $conn = new mysqli($_ENV["SERVER"], $_ENV["USERNAME"], $_ENV["PASSWORD"], $_ENV["DB_NAME"]); 
+    }catch(Exception $e){
+        echo $e->getMessage(); 
+        return [];
+    }
+
+    //Prepare and execute query
+    $query =  "SELECT courseCode from CourseTable WHERE studentId = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("s", $id); 
+    $stmt->execute();
+    $result = $stmt->get_result(); 
+    $conn->close();
+
+    $courses = []; 
+    foreach($result as $row){
+        array_push($courses, $row["courseCode"]); 
+    }
+    print_r($courses); 
+
+    return $courses;
+}
 ?>
