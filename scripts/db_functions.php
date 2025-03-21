@@ -116,7 +116,8 @@ function modify_grades(string $id, string $coursecode, array $new_vals){
  * Performs a search query for id, returns array of matching ids
  * 
  * @param string $search_str - search input (id or nae)
- * @return array     - Array of Student IDs matching search query
+ * @return array     - 2d array of results each element in array contains associative array with keys
+ *                     ["StudentID"] and ["StudentName"]
  */
 function search_students(string $search_str){
 
