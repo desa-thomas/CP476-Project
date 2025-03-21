@@ -213,7 +213,6 @@ function get_student_courses(string $id){
     foreach($result as $row){
         array_push($courses, $row["courseCode"]); 
     }
-    print_r($courses); 
 
     return $courses;
 }
