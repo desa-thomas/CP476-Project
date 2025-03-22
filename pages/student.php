@@ -53,8 +53,12 @@ from search.php -->
 
 </body>
 
-<div id="modify-course" class="modify-course" hidden>
-    <div class="row">
+<!-- Modify course grades popup -->
+<div id="modify-course" hidden>
+    <!-- Row with X -->
+    <div class="row margin">
+        <h2>XX123</h2>
+
         <div class="placeholder"></div>
         <svg xmlns="http://www.w3.org/2000/svg" width="25px" height="25px"
             viewBox="0 0 384 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
@@ -63,6 +67,27 @@ from search.php -->
         </svg>
     </div>
 
+    <hr>
+
+    <div class="col">
+        <div class="row">
+            <h3>Test 1:</h3>
+            <h4>89%</h4>
+            <div class="placeholder"></div>
+            <h4>New value</h4>
+            <input type="text">
+        </div>
+
+        <div class="row">
+            <div class="placeholder"></div>
+            <button>Clear</button>
+            <button type="submit">Update Grades</button>
+            <button id="DELETE-COURSE">Delete Course</button>
+            <div class="placeholder"></div>
+        </div>
+    </div>
+    
+    <div class="placeholder"></div>
 
 </div>
 <div id="blur" class="blur" hidden></div>

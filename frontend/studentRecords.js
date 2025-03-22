@@ -109,10 +109,12 @@ function create_grade_card(course_grades){
 
 function modify_course(){
   document.getElementById("modify-course").hidden = false
+  document.getElementById("modify-course").classList.add("modify-course")
   document.getElementById("blur").hidden = false
 }
 
 function close_modify_course(){
   document.getElementById("modify-course").hidden = true
+  document.getElementById("modify-course").classList.remove("modify-course")
   document.getElementById("blur").hidden = true
 }
