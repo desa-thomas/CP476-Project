@@ -47,7 +47,7 @@ let courses = $student_courses_json;</script>";
             <div>
                 <input id="searchbar" type="text" placeholder="Student Id or name">
                 <button id="search-button">Search</button>
-                <button onclick="window.location.href='../scripts/logout.php'" style="width: 100px;">Logout</button>
+                <button onclick="window.location.href='../scripts/logout.php'">Logout</button>
             </div>
         </div>
 
