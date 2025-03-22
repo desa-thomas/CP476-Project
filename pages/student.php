@@ -60,7 +60,7 @@ from search.php -->
 <div id="modify-course" hidden>
     <!-- Row with X -->
     <div class="row margin">
-        <h2>XX123</h2>
+        <h2 id="popup-course-code">XX123</h2>
 
         <div class="placeholder"></div>
         <svg xmlns="http://www.w3.org/2000/svg" width="25px" height="25px"
@@ -69,28 +69,27 @@ from search.php -->
                 d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
         </svg>
     </div>
-
     <hr>
 
-    <div class="col">
-        <div class="row">
-            <h3>Test 1:</h3>
-            <h4>89%</h4>
-            <div class="placeholder"></div>
-            <h4>New value</h4>
-            <input type="text">
+
+    <form class="col" style="gap:20px">
+
+        <div id="popup-tests" class="col">
+            <!-- Test scores for popup form -->
+
         </div>
 
-        <div class="row">
+
+        <div id="popup-buttons" class="row">
             <div class="placeholder"></div>
-            <button>Clear</button>
-            <button type="submit">Update Grades</button>
+            <button id="clear-grades">Clear</button>
+            <button id="update-grades" type="submit">Update Grades</button>
             <button id="DELETE-COURSE">Delete Course</button>
             <div class="placeholder"></div>
         </div>
-    </div>
-    
-    <div class="placeholder"></div>
+
+        <div class="placeholder"></div>
+    </form>
 
 </div>
 <div id="blur" class="blur" hidden></div>

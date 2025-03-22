@@ -121,6 +121,9 @@ button:active{
     gap: 5px; 
 
 }
+.center{
+    align-items: center;
+}
 .placeholder{
     flex-grow: 4;
     align-self: stretch;
@@ -226,23 +229,26 @@ hr{
 
 /* Modify course popup window */
 .modify-course{
-    --w: 60%;
-    --h: 70%;
 
     background-color: var(--font-color);
     color: var(--primaryColor);
     
-    /* Overlay  */
-    width: var(--w);
-    height: var(--h); 
+    width: 60%;
+    height: fit-content;
+    max-width: 500px;
+    max-height: fit-content; 
+    min-height: fit-content;
 
+    /* Overlay  */
     z-index: 2;
     position:absolute;
     
-    top: calc((var(--h) - 40px)/4); 
-    left:50%;
-
-    margin-left: calc((var(--w) + 40px)/2 *-1);
+    /* Center popup */
+    top:20vh; 
+    left:0;
+    right:0;
+    margin-inline:auto;
+    
 
     border-radius: 25px;
     padding: 20px; 
@@ -280,19 +286,28 @@ hr{
 .modify-course input{
     background-color: var(--content-background);
     color: var(--primaryColor);
-    width: 20px; 
+    width: 30px; 
+    text-indent: 8px;
 }
 
 .modify-course button{
     width: 150px;
 }
 .modify-course button:hover{
-    background-color: #759590db;
+    background-color: #835aa7b5;
+}
+
+#update-grades{
+    background-color: #53968cb6;
+}
+#update-grades:hover{
+    background-color: #835aa7b5;;
 }
 
 #DELETE-COURSE{
     background-color: var(--accentColor);
 }
+
 #DELETE-COURSE:hover{
     background-color: #c32a0fe1; 
 }
@@ -300,4 +315,8 @@ hr{
 .modify-course hr{
     margin: 0px; 
     color: var(--primaryColor)
+}
+
+.test-h3{
+    width:30%; 
 }
