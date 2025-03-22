@@ -8,7 +8,7 @@ onload = () => {
   
   //set title
   document.getElementById("title").innerHTML = `${studentName} - ${id}`;
-  document.getElementById("title").onclick = ()=>{window.location = '../index.html'}
+  document.getElementById("title").onclick = ()=>{window.location = '../index.php'}
 
   
   //create course card for each course student completed

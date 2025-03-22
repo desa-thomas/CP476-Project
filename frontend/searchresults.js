@@ -8,7 +8,7 @@
 onload = ()=>{
 
     document.getElementById("title").innerHTML = `${search_results.length} Search Results for "${search_input}"`
-    document.getElementById("title").onclick = ()=>{window.location = '../index.html'}
+    document.getElementById("title").onclick = ()=>{window.location = '../index.php'}
 
     //search_results from search.php
     let i = 0
