@@ -84,7 +84,7 @@ $query = "CREATE TABLE Users(
 
 $conn->query($query);
 
-# Insert default admin user (password will be hashed in production)
+# Insert default admin user
 $default_username = 'admin';
 $default_password = password_hash('admin123', PASSWORD_DEFAULT);
 $stmt = $conn->prepare("INSERT INTO Users (username, password) VALUES (?, ?)");
@@ -114,11 +114,9 @@ $stmt->bind_param("ssdddd", $id, $coursecode, $t1, $t2, $t3, $fe);
 
 $file = fopen(__DIR__."/../proj data files/CourseTable.txt", "r");
 while(!feof($file)){
-    #split line on commas 
     $line = explode(",", fgets($file));
 
     if($line){
-        #store references in arr so you can execute statment
         $arr = [&$id, &$coursecode, &$t1, &$t2, &$t3, &$fe];
         for($i = 0; $i< 6; $i++){
             $arr[$i] = trim($line[$i]);
