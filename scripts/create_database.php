@@ -37,7 +37,7 @@ try {
 }
 
 #drop tables
-$conn->query("DROP TABLE IF EXISTS NameTable, CourseTable");
+$conn->query("DROP TABLE IF EXISTS NameTable, CourseTable, Users");
 
 #Create tables NameTable, and CourseTable
 $query =
@@ -74,6 +74,23 @@ $query = "CREATE TABLE CourseTable(
 
 $conn->query($query);
 
+# Create Users table for authentication
+$query = "CREATE TABLE Users(
+    id INT(9) AUTO_INCREMENT,
+    username VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    PRIMARY KEY(id)
+)";
+
+$conn->query($query);
+
+# Insert default admin user
+$default_username = 'admin';
+$default_password = password_hash('admin123', PASSWORD_DEFAULT);
+$stmt = $conn->prepare("INSERT INTO Users (username, password) VALUES (?, ?)");
+$stmt->bind_param("ss", $default_username, $default_password);
+$stmt->execute();
+
 echo "Tables Created...\n";
 
 #Insert data into the tables using prepared statements
@@ -97,11 +114,9 @@ $stmt->bind_param("ssdddd", $id, $coursecode, $t1, $t2, $t3, $fe);
 
 $file = fopen(__DIR__."/../proj data files/CourseTable.txt", "r");
 while(!feof($file)){
-    #split line on commas 
     $line = explode(",", fgets($file));
 
     if($line){
-        #store references in arr so you can execute statment
         $arr = [&$id, &$coursecode, &$t1, &$t2, &$t3, &$fe];
         for($i = 0; $i< 6; $i++){
             $arr[$i] = trim($line[$i]);

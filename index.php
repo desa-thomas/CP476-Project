@@ -1,3 +1,7 @@
+<?php
+include("scripts/auth_check.php");
+check_auth();
+?>
 <!DOCTYPE html>
   <head>
     <!-- page script and styles -->
@@ -17,6 +21,7 @@
       <div class="row">
         <input id="searchbar" type="text" placeholder="Student ID or name" />
         <button id="search-button">Search</button>
+        <button onclick="window.location.href='scripts/logout.php'" style="width: 100px;">Logout</button>
       </div>
 
       <div class="placeholder"></div>
