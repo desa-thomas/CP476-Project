@@ -60,7 +60,7 @@ input{
     background-color: var(--search-bar-color);
     outline:none; 
     border:none;
-    width: 125px;
+    width: 40%;
 }
 
 ::placeholder{
@@ -209,9 +209,13 @@ search.php styles
     align-items: center;
     align-self: stretch;
     padding-bottom: 5px;
+    gap: 10px;
+    flex-wrap: wrap;
+
 }
 hr{
-    margin-bottom: 20px;
+    margin-top: 10px; 
+    margin-bottom: 10px;
 }
 
 .search-result:hover, .course:hover{
