@@ -6,7 +6,10 @@ Search for Student by ID in DB, then return HTML page displaying those results
 -->
 <!DOCTYPE html>
 
-<?php include("../scripts/db_functions.php");
+<?php 
+include("../scripts/db_functions.php");
+include("../scripts/auth_check.php");
+check_auth();
 
 //Get search value from URL parameters
 $search_input = $_GET["search"];
@@ -29,8 +32,6 @@ let search_input = '$search_input';
 let courses = $student_courses_json;</script>";
 ?>
 
-
-
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="../frontend/styles.css">
@@ -46,6 +47,7 @@ let courses = $student_courses_json;</script>";
             <div>
                 <input id="searchbar" type="text" placeholder="Student Id or name">
                 <button id="search-button">Search</button>
+                <button onclick="window.location.href='../scripts/logout.php'" style="width: 100px;">Logout</button>
             </div>
         </div>
 
