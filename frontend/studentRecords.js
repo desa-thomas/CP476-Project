@@ -4,6 +4,10 @@
  *
  * Client script for the student records page (student.php)
  */
+
+/**
+ * On load script
+ */
 onload = () => {
   //set title
   document.getElementById("title").innerHTML = `${studentName} - ${id}`;
@@ -35,6 +39,8 @@ onload = () => {
   });
 };
 
+//FUNCTIONS
+
 /**
  * Get value from search bar and go to search result page (search.php?search={})
  * @returns
@@ -56,7 +62,7 @@ function search() {
  * @return {HTMLDivElement}      - Div grade card containing all grades for course
  */
 function create_grade_card(course_grades) {
-  let top_div = document.createElement("div");
+  const top_div = document.createElement("div");
 
   //calculate final grade
   final_grade =
@@ -67,9 +73,9 @@ function create_grade_card(course_grades) {
   final_grade = Math.round(final_grade * 100) / 100;
 
   //create course title card
-  let course_title = document.createElement("div");
+  const course_title = document.createElement("div");
   course_title.className = "student-card student-card-header course";
-  let title = document.createElement("h3");
+  const title = document.createElement("h3");
   title.className = "card-content";
   title.innerHTML = course_grades.courseCode;
 
@@ -86,12 +92,12 @@ function create_grade_card(course_grades) {
   let test_names = [0, 0, "Test 1", "Test 2", "Test 3", "Final Exam"];
   keys = Object.keys(course_grades);
   for (let i = 2; i < keys.length; i++) {
-    let test_card = document.createElement("div");
+    const test_card = document.createElement("div");
     test_card.className = "student-card course-grade border";
 
-    let test = document.createElement("h3");
+    const test = document.createElement("h3");
     test.className = "card-content";
-    let score = document.createElement("h3");
+    const score = document.createElement("h3");
     score.className = "card-content";
 
     test.innerHTML = test_names[i];
@@ -127,7 +133,7 @@ function modify_course(course_grades) {
     `Modify Course - ${course_grades.courseCode}`;
 
   //iterate over course grades and create row for each test
-  let test_names = [0, 0, "Test 1", "Test 2", "Test 3", "Final Exam"];
+  const test_names = [0, 0, "Test 1", "Test 2", "Test 3", "Final Exam"];
   keys = Object.keys(course_grades);
   for (let i = 2; i < keys.length; i++) {
     const h3 = document.createElement("h3")
@@ -138,20 +144,32 @@ function modify_course(course_grades) {
 
     const input = document.createElement("input")
     input.type = "text"
+
+    //Set input field id and name to its key (i.e., test1, test2...)
     input.id = keys[i]
-    input.value = course_grades[keys[i]]
+    input.name = keys[i]
+    
     input.oninput = (e)=>{validate_modify_form(e)}
 
+    //set clear button
+    document.getElementById("clear-grades").onclick = ()=>{clear_popup(course_grades)}
+
     //placeholders
-    let ph = document.createElement("div")
+    const ph = document.createElement("div")
     ph.className = "placeholder"
-    let ph2 = document.createElement("div")
+    const ph2 = document.createElement("div")
     ph2.className = "placeholder"
-    let ph3 = document.createElement("div")
+    const ph3 = document.createElement("div")
     ph3.className = "placeholder"
 
-    let percent = document.createElement('h4')
+    const percent = document.createElement('h4')
     percent.innerHTML = "%"
+
+    //Hidden input field to pass the course code to POST
+    const hidden_field = document.createElement("input")
+    hidden_field.type = "hidden"
+    hidden_field.name = "course-code"
+    hidden_field.value = course_grades.courseCode
 
     const div = document.createElement("div")
     div.className = "row"
@@ -162,6 +180,7 @@ function modify_course(course_grades) {
     div.appendChild(input)
     div.appendChild(percent)
     div.appendChild(ph2)
+    div.appendChild(hidden_field)
 
     document.getElementById("popup-tests").appendChild(div)
   }
@@ -189,13 +208,30 @@ function close_modify_course() {
 
 /**
  * Validate the update course grade form input
+ * Makes sure that input is only numbers between [0, 100]
  * @param {Event} e 
  */
 function validate_modify_form(e){
+  
   e.target.value = e.target.value.trim()
 
   //if input is: not a number or not in range [0,100]
   if(isNaN(e.target.value) || Number(e.target.value) < 0 || Number(e.target.value) >100){
-    e.target.value = e.target.value.slice(0,-1)
+    //remove value that was just added
+    e.target.value = e.target.value.replace(e.data, "")
+  }
+}
+
+/**
+ * Function for clear button on popup form
+ * 
+ * @param {object} course_code    - associative array of course grades
+ *                                 keys: "courseCode", "test1", "test2", "test3", "finalExam"
+ */
+function clear_popup(course_grades){
+  keys = Object.keys(course_grades);
+  //clear value of all inputs on form
+  for (let i = 2; i < keys.length; i++) {
+    document.getElementById(keys[i]).value = ""
   }
 }
