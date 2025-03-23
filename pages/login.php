@@ -12,7 +12,7 @@
         <div class="placeholder"></div>
         <div class="content main login">
             <h2>Admin Login</h2>
-            <form action="../scripts/handle_login.php" method="POST" class="login">
+            <form action="../scripts/handle_login.php" method="POST" class="">
 
                 <div class="login-inputs">
                     <input type="text" name="username" placeholder="Username" required>                    
