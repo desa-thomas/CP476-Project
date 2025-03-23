@@ -35,7 +35,7 @@ function delete_course(string $id, string $coursecode){
     $conn->close(); 
 
     if($affected_rows == 1){
-        return[true, "Course Deleted"];
+        return[true, "Course Deleted Successfully"];
     }
     else{
         return[false, "Course or Student not found"];
@@ -85,7 +85,7 @@ function modify_grades(string $id, string $coursecode, array $new_vals){
     }
     /** If no values are given to update return */
     if (count($values) == 0 ){
-        return [false, "No values were updated"]; 
+        return [false, ""]; 
     }
 
     /** Add WHERE clause to query */
@@ -105,7 +105,7 @@ function modify_grades(string $id, string $coursecode, array $new_vals){
     $conn->close();
 
     if ($affected_rows){
-        return [true, "Grades updated"]; 
+        return [true, "Grades updated Successfully"]; 
     }
     else{
         return [false, "No rows affected ... Check student ID and Course"]; 
