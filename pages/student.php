@@ -48,6 +48,14 @@ from search.php -->
             </div>
         </div>
         <hr>
+        
+        <!-- Modify/Delete course message -->
+        <?php
+        if (isset($_SESSION['modify-message'])) {
+            echo "<p class='modify-message'>" . $_SESSION['modify-message'] . "</p>";
+            unset($_SESSION['modify-message']);
+        }
+        ?>
 
         <div id="search-results-container">
         </div>
@@ -72,22 +80,21 @@ from search.php -->
     <hr>
 
 
-    <form class="col" style="gap:20px">
-
+    <form action="../scripts/modify_course.php" method="POST" class="col" style="gap:20px">
         <div id="popup-tests" class="col">
             <!-- Test scores for popup form -->
-
         </div>
-
 
         <div id="popup-buttons" class="row">
             <div class="placeholder"></div>
-            <button id="clear-grades">Clear</button>
-            <button id="update-grades" type="submit">Update Grades</button>
-            <button id="DELETE-COURSE">Delete Course</button>
+            <button id="clear-grades" type="button">Clear</button>
+            <button id="update-grades" type="submit" name="UPDATE">Update Grades</button>
+            <button id="DELETE-COURSE" type="submit" name="DELETE">Delete Course</button>
             <div class="placeholder"></div>
         </div>
 
+        <!-- Hidden input containing student Id -->
+        <input type="hidden" name="id" value=<?php echo $_GET["id"] ?>>
         <div class="placeholder"></div>
     </form>
 
