@@ -1,8 +1,9 @@
 <?php
-function check_auth() {
+function check_auth($root=false) {
     session_start();
     if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
-        header('Location: ../pages/login.php');
+        if (!$root) header('Location: ./login.php');
+        else header('Location: ./pages/login.php');
         exit();
     }
 }

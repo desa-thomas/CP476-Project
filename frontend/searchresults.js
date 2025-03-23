@@ -81,7 +81,7 @@ function create_student_card(id, name, courses){
 function search(){
     let search_input = document.getElementById("searchbar").value
 
-    window.location = `/pages/search.php?search=${search_input}`
+    window.location = `./search.php?search=${search_input}`
 
     return
 }
@@ -92,6 +92,6 @@ function search(){
  * @param id - Student Id to get
  */
 function get_student(id){
-    window.location = `/pages/student.php?id=${id}` 
+    window.location = `./student.php?id=${id}` 
     return 
 }
