@@ -1,6 +1,7 @@
 <?php
 include("scripts/auth_check.php");
 check_auth();
+header("location: pages/search.php?search=")
 ?>
 <!DOCTYPE html>
 
