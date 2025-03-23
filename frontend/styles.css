@@ -138,10 +138,17 @@ button:active{
     gap: 15px;
 }
 .login{
-    height: 40%;
-    width: 40%;
+    height: 80%;
+    width: 60%;
+
+    max-width: 400px;
+    max-height: 200px
+
 }
 .login-inputs{gap: 10px;}
+.login-inputs input{
+    width: 100%;
+}
 
 /* Index.php styles */
 
@@ -165,7 +172,8 @@ search.php styles
     border-bottom: none;
     background-color: var(--div-color);
     margin-top: 10px;
-    width: 80vw;
+    width: 100%;
+    max-width: 1200px;
 }
 
 /*Card styles*/
@@ -319,4 +327,8 @@ hr{
 
 .test-h3{
     width:30%; 
+}
+
+.modify-message{
+    color: #b0ede4cb
 }
