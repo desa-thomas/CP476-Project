@@ -335,10 +335,13 @@ hr{
 #left-arrow{
     fill:var(--font-color);
 }
-#left-arrow:hover{
-    fill:var(--secondaryColor)
+.svg:hover{
+    background-color:var(--secondaryColor)
 }
+
 .svg{
-    margin-top: 5px;
-    margin-left: 20px;
+   padding: 5px 10px;
+   border-radius: 10px;
+   margin-top: 5px;
+   margin-left: 20px;
 }

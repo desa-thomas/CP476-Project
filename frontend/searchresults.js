@@ -15,7 +15,7 @@ onload = ()=>{
         document.getElementById("title").innerHTML = "Student Grades";
         document.getElementById("left-arrow-container").hidden = true
     }
-    document.getElementById("left-arrow").onclick = ()=>{window.location = '../index.php'}
+    document.getElementById("left-arrow-svg").onclick = ()=>{window.location = '../index.php'}
 
     //Create a row for each course record
     for(let record of student_course_records) {
