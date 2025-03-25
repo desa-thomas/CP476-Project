@@ -8,11 +8,14 @@
 onload = ()=>{
     if (search_input && search_input.trim() !== '') {
         const resultsText = document.createElement("span");
-        document.getElementById("title").innerHTML = `← ${student_course_records.length} Results for "${search_input}"`;
+        document.getElementById("title").innerHTML = `${student_course_records.length} Results for "${search_input}"`;
+        document.getElementById("left-arrow-container").hidden = false
+
     } else {
         document.getElementById("title").innerHTML = "Student Grades";
+        document.getElementById("left-arrow-container").hidden = true
     }
-    document.getElementById("title").onclick = ()=>{window.location = '../index.php'}
+    document.getElementById("left-arrow").onclick = ()=>{window.location = '../index.php'}
 
     //Create a row for each course record
     for(let record of student_course_records) {

@@ -248,10 +248,10 @@ hr{
 
     /* Overlay  */
     z-index: 2;
-    position:absolute;
+    position:fixed;
     
     /* Center popup */
-    top:20vh; 
+    top:30%;
     left:0;
     right:0;
     margin-inline:auto;
@@ -272,7 +272,7 @@ hr{
 /* Blur filter for background when modifying a course */
 .blur{
     z-index: 1;
-    position:absolute;
+    position:fixed;
     top:0px; 
     left:0px; 
 
@@ -330,4 +330,15 @@ hr{
 
 .modify-message{
     color: #b0ede4cb
+}
+
+#left-arrow{
+    fill:var(--font-color);
+}
+#left-arrow:hover{
+    fill:var(--secondaryColor)
+}
+.svg{
+    margin-top: 5px;
+    margin-left: 20px;
 }

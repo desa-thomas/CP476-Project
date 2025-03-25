@@ -6,7 +6,7 @@ Search for Student by ID in DB, then return HTML page displaying those results
 -->
 <!DOCTYPE html>
 
-<?php 
+<?php
 include("../scripts/db_functions.php");
 include("../scripts/auth_check.php");
 check_auth();
@@ -20,16 +20,16 @@ $_SESSION['last_search'] = $search_input;
 
 //Get all course records for the search results
 $student_course_records = [];
-foreach($search_results as $student) {
+foreach ($search_results as $student) {
     $courses = get_student_grades($student["StudentID"]);
-    foreach($courses as $course) {
+    foreach ($courses as $course) {
         //Calculate final grade for each course
-        $final_grade = round($course['test1'] * 0.2 + 
-                        $course['test2'] * 0.2 + 
-                        $course['test3'] * 0.2 + 
-                        $course['finalExam'] * 0.4, 1); 
+        $final_grade = round($course['test1'] * 0.2 +
+            $course['test2'] * 0.2 +
+            $course['test3'] * 0.2 +
+            $course['finalExam'] * 0.4, 1);
         $final_grade = round($final_grade * 100) / 100;
-        
+
         $student_course_records[] = [
             'StudentID' => $student['StudentID'],
             'StudentName' => $student['StudentName'],
@@ -42,7 +42,7 @@ foreach($search_results as $student) {
 
 //pass search results to javascript
 echo "<script>
-let student_course_records = ".json_encode($student_course_records).";
+let student_course_records = " . json_encode($student_course_records) . ";
 let search_input = '$search_input';
 </script>";
 ?>
@@ -56,7 +56,15 @@ let search_input = '$search_input';
 <body>
     <div class="content main">
         <div class="header">
-            <h1 id="title" class="click">Search Results</h1>
+            <div id ="left-arrow-container" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" width="40px" height="40px" class="svg"
+                    viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                    <path id="left-arrow"
+                        d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 288 480 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-370.7 0 73.4-73.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-128 128z" />
+                </svg>
+            </div>
+
+            <h1 id="title">Search Results</h1>
             <div class="placeholder"></div>
 
             <div>
@@ -78,7 +86,7 @@ let search_input = '$search_input';
         </div>
 
     </div>
-    
+
     <!-- Modify course grades popup -->
     <div id="modify-course" hidden>
         <!-- Row with X -->
