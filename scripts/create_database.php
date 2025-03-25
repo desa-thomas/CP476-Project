@@ -1,7 +1,7 @@
 <?php
 /*
 Date   - Feb 26 2024
-Author - Thomas De Sa
+Author - Thomas De Sa, Patrick Bernacki, Abhishek Jariwala, Ojuoluwa Dabiri
 
 Script to be ran on server start up or creation. It should only be ran once, or if you want 
 to reset the database back to its original state.

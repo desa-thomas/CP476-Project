@@ -1,6 +1,6 @@
 /**
  * Date: March 11 2025 
- * Authors: Thomas De Sa, 
+ * Authors: Thomas De Sa, Patrick Bernacki, Abhishek Jariwala, Ojuoluwa Dabiri
  * 
  * Client script for the search page (index.html at the moment)
  */

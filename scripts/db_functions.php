@@ -1,7 +1,7 @@
 <?php
 /*
 Date  : March 5 2025
-Authors: Thomas De Sa,
+Authors: Thomas De Sa, Patrick Bernacki, Abhishek Jariwala, Ojuoluwa Dabiri
 
 Functions to query the CP476-Project Database.
 

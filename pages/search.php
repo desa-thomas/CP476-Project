@@ -1,6 +1,6 @@
 <!-- 
 Date: March 11 2025
-Authors: Thomas De Sa,
+Authors: Thomas De Sa, Patrick Bernacki, Abhishek Jariwala, Ojuoluwa Dabiri
 
 Search for Student by ID in DB, then return HTML page displaying those results
 -->
