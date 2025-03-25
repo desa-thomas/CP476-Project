@@ -1,8 +1,8 @@
 # Setup
 Create a `.env` file with the following variables to establish a database connection:
 ```
-SERVER=   "localhost"
-DB_NAME=  "your_db_name"
+SERVER  = "localhost"
+DB_NAME = "your_db_name"
 USERNAME= "your_username"
 PASSWORD= "your_password"
 ```
