@@ -24,10 +24,10 @@ foreach($search_results as $student) {
     $courses = get_student_grades($student["StudentID"]);
     foreach($courses as $course) {
         //Calculate final grade for each course
-        $final_grade = $course['test1'] * 0.2 + 
-                      $course['test2'] * 0.2 + 
-                      $course['test3'] * 0.2 + 
-                      $course['finalExam'] * 0.4;
+        $final_grade = round($course['test1'] * 0.2 + 
+                        $course['test2'] * 0.2 + 
+                        $course['test3'] * 0.2 + 
+                        $course['finalExam'] * 0.4, 1); 
         $final_grade = round($final_grade * 100) / 100;
         
         $student_course_records[] = [
@@ -60,7 +60,7 @@ let search_input = '$search_input';
             <div class="placeholder"></div>
 
             <div>
-                <input id="searchbar" type="text" placeholder="Student Id or name">
+                <input id="searchbar" type="text" placeholder="Search by id/name">
                 <button id="search-button">Search</button>
                 <button onclick="window.location.href='../scripts/logout.php'">Logout</button>
             </div>

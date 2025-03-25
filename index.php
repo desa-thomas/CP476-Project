@@ -25,7 +25,7 @@ header("location: pages/search.php?search=")
     <div class="placeholder"></div>
 
     <div class="row">
-      <input id="searchbar" class="main-searchbar" type="text" placeholder="Student ID or name" />
+      <input id="searchbar" class="main-searchbar" type="text" placeholder="search by id or name" />
       <button id="search-button">Search</button>
     </div>
 

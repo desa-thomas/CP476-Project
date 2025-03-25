@@ -6,7 +6,12 @@
  */
 
 onload = ()=>{
-    document.getElementById("title").innerHTML = `${student_course_records.length} Search Results for "${search_input}"`
+    if (search_input && search_input.trim() !== '') {
+        const resultsText = document.createElement("span");
+        document.getElementById("title").innerHTML = `← ${student_course_records.length} Results for "${search_input}"`;
+    } else {
+        document.getElementById("title").innerHTML = "Student Grades";
+    }
     document.getElementById("title").onclick = ()=>{window.location = '../index.php'}
 
     //Create a row for each course record
@@ -58,7 +63,7 @@ function create_course_row(record) {
     // Final Grade
     let gradeElement = document.createElement("h4");
     gradeElement.className = "card-content";
-    gradeElement.textContent = `${record.FinalGrade}%`;
+    gradeElement.textContent = `${parseFloat(record.FinalGrade).toFixed(1)}%`;
     
     // Add click handler to show modify popup
     row.onclick = () => {
@@ -104,8 +109,8 @@ function modify_course(course_grades, student_name, studentId) {
       h3.className = "test-h3"
       h3.innerHTML = test_names[i]
       const h4 = document.createElement("h4")
-      h4.innerHTML = `${course_grades[keys[i]]}%`
-  
+      h4.innerHTML = `${Number(course_grades[keys[i]]).toFixed(1)}%`
+      
       const input = document.createElement("input")
       input.type = "text"
   
