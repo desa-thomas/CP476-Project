@@ -48,7 +48,7 @@ onload = () => {
 function search() {
   let search_input = document.getElementById("searchbar").value;
 
-  window.location = `./search.php?search=${search_input}`;
+  window.location = `./search.php?search=${encodeURIComponent(search_input)}`;
 
   return;
 }

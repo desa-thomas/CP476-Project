@@ -15,21 +15,36 @@ check_auth();
 $search_input = $_GET["search"];
 $search_results = search_students($search_input);
 
-//Get the course codes for all student results
-$student_courses = [];
-foreach($search_results as $row){
-    $courses = get_student_courses($row["StudentID"]);
-    array_push($student_courses, $courses);
+//Store the last search for redirects after modify
+$_SESSION['last_search'] = $search_input;
+
+//Get all course records for the search results
+$student_course_records = [];
+foreach($search_results as $student) {
+    $courses = get_student_grades($student["StudentID"]);
+    foreach($courses as $course) {
+        //Calculate final grade for each course
+        $final_grade = $course['test1'] * 0.2 + 
+                      $course['test2'] * 0.2 + 
+                      $course['test3'] * 0.2 + 
+                      $course['finalExam'] * 0.4;
+        $final_grade = round($final_grade * 100) / 100;
+        
+        $student_course_records[] = [
+            'StudentID' => $student['StudentID'],
+            'StudentName' => $student['StudentName'],
+            'CourseCode' => $course['courseCode'],
+            'FinalGrade' => $final_grade,
+            'Grades' => $course // Include all grade details for popup
+        ];
+    }
 }
 
-//pass search results to javascript for dynamic loading of content
-$json = json_encode($search_results);
-$student_courses_json = json_encode($student_courses); 
-
+//pass search results to javascript
 echo "<script>
-let search_results = $json;
+let student_course_records = ".json_encode($student_course_records).";
 let search_input = '$search_input';
-let courses = $student_courses_json;</script>";
+</script>";
 ?>
 
 <head>
@@ -57,9 +72,45 @@ let courses = $student_courses_json;</script>";
             <div class="student-card student-card-header">
                 <h2 class="card-content id">ID</h2>
                 <h2 class="card-content">Name</h2>
-                <h2 class="card-content">Courses</h2>
+                <h2 class="card-content">Course</h2>
+                <h2 class="card-content">Final Grade</h2>
             </div>
         </div>
 
     </div>
+    
+    <!-- Modify course grades popup -->
+    <div id="modify-course" hidden>
+        <!-- Row with X -->
+        <div class="row margin">
+            <h2 id="popup-course-code">XX123</h2>
+
+            <div class="placeholder"></div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="25px" height="25px"
+                viewBox="0 0 384 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                <path id="x-close"
+                    d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
+            </svg>
+        </div>
+        <hr>
+
+        <form action="../scripts/modify_course.php" method="POST" class="col" style="gap:20px">
+            <div id="popup-tests" class="col">
+                <!-- Test scores for popup form -->
+            </div>
+
+            <div id="popup-buttons" class="row">
+                <div class="placeholder"></div>
+                <button id="clear-grades" type="button">Clear</button>
+                <button id="update-grades" type="submit" name="UPDATE">Update Grades</button>
+                <button id="DELETE-COURSE" type="submit" name="DELETE">Delete Course</button>
+                <div class="placeholder"></div>
+            </div>
+
+            <!-- Hidden input containing student Id -->
+            <input type="hidden" name="id" id="student-id-input">
+            <div class="placeholder"></div>
+        </form>
+    </div>
+    <div id="blur" class="blur" hidden></div>
 </body>

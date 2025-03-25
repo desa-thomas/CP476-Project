@@ -6,92 +6,196 @@
  */
 
 onload = ()=>{
-
-    document.getElementById("title").innerHTML = `${search_results.length} Search Results for "${search_input}"`
+    document.getElementById("title").innerHTML = `${student_course_records.length} Search Results for "${search_input}"`
     document.getElementById("title").onclick = ()=>{window.location = '../index.php'}
 
-    //search_results from search.php
-    let i = 0
-    for(row of search_results){
-        
-        let studentcard = create_student_card(row.StudentID, row.StudentName, courses[i])
-        document.getElementById("search-results-container").appendChild(studentcard)
-        i++
+    //Create a row for each course record
+    for(let record of student_course_records) {
+        let row = create_course_row(record);
+        document.getElementById("search-results-container").appendChild(row);
     }
 
     //Setup searchbar
-    document.getElementById("searchbar").value = ""
-    document.getElementById("search-button").onclick = search
+    document.getElementById("searchbar").value = search_input;
+    document.getElementById("search-button").onclick = search;
 
     //Enter key presses search button
     document.getElementById("searchbar").addEventListener("keypress", (e)=>{
         if(e.key === "Enter"){
-            document.getElementById("search-button").click()
+            document.getElementById("search-button").click();
         }
-    })
+    });
+    
+    //close modify course when clicking off
+    document.getElementById("blur").onclick = close_modify_course;
+    document.getElementById("x-close").onclick = close_modify_course;
 }
 
 /**
- * Create a student search result card based on student ID and name
- * @param {string} id   - 9 digit student ID 
- * @param {string} name - Student full name
- * @param {object} courses - array of course codes student is taking
- * 
- * @return {HTMLDivElement} studentcard - Div element to be added to doc tree
+ * Create a row for a single course record
+ * @param {object} record - Contains StudentID, StudentName, CourseCode, FinalGrade, Grades
+ * @return {HTMLDivElement} row - Div element to be added to doc tree
  */
-function create_student_card(id, name, courses){
-    let studentcard = document.createElement("div")
-
-    studentcard.className = "student-card"
+function create_course_row(record) {
+    let row = document.createElement("div");
+    row.className = "student-card search-result border";
     
-    let idElement = document.createElement("h4")
-    let nameElement = document.createElement("h4")
-    let courseElement = document.createElement("div")
-    courseElement.className = "course-name-container"
-
-    idElement.innerHTML = id
-    idElement.className = "card-content id"
-
-    nameElement.innerHTML = name
-    nameElement.className = "card-content"
-
+    // Student ID
+    let idElement = document.createElement("h4");
+    idElement.className = "card-content id";
+    idElement.textContent = record.StudentID;
     
-    for (course of courses){
-        let h4 = document.createElement("h4")
-        h4.innerHTML = course
-        courseElement.appendChild(h4)
-    }
+    // Student Name
+    let nameElement = document.createElement("h4");
+    nameElement.className = "card-content";
+    nameElement.textContent = record.StudentName;
     
-    //for hover and click
-    studentcard.classList.add("search-result")
-    studentcard.classList.add("border")
-    studentcard.onclick = ()=>{get_student(id)}
+    // Course Code
+    let courseElement = document.createElement("h4");
+    courseElement.className = "card-content";
+    courseElement.textContent = record.CourseCode;
+    
+    // Final Grade
+    let gradeElement = document.createElement("h4");
+    gradeElement.className = "card-content";
+    gradeElement.textContent = `${record.FinalGrade}%`;
+    
+    // Add click handler to show modify popup
+    row.onclick = () => {
+        modify_course(record.Grades, record.StudentName, record.StudentID);
+    };
+    
+    // Append all elements
+    row.appendChild(idElement);
+    row.appendChild(nameElement);
+    row.appendChild(courseElement);
+    row.appendChild(gradeElement);
 
-    studentcard.appendChild(idElement)
-    studentcard.appendChild(nameElement)
-    studentcard.appendChild(courseElement)
-
-    return studentcard
+    return row;
 }
 
 /**
  * Get value from search bar and go to search result page (search.php?search={})
- * @returns 
  */
-function search(){
-    let search_input = document.getElementById("searchbar").value
-
-    window.location = `./search.php?search=${search_input}`
-
-    return
+function search() {
+    let search_input = document.getElementById("searchbar").value;
+    window.location = `./search.php?search=${encodeURIComponent(search_input)}`;
 }
 
 /**
- * On click function for student search results card. Takes you to view student pages
- * 
- * @param id - Student Id to get
+ * Create modify course popup when a row is clicked
+ * @param {object} course_grades - Contains course grades (test1, test2, test3, finalExam)
+ * @param {string} studentId - Student ID
  */
-function get_student(id){
-    window.location = `./student.php?id=${id}` 
-    return 
-}
+function modify_course(course_grades, student_name, studentId) {
+    document.getElementById("modify-course").classList.add("modify-course");
+    //set title to course code
+    document.getElementById("popup-course-code").innerHTML =
+      `${student_name} - ${course_grades.courseCode}`;
+
+    document.getElementById("student-id-input").value = studentId;
+
+  
+    //iterate over course grades and create row for each test
+    const test_names = [0, 0, "Test 1", "Test 2", "Test 3", "Final Exam"];
+    keys = Object.keys(course_grades);
+    for (let i = 2; i < keys.length; i++) {
+      const h3 = document.createElement("h3")
+      h3.className = "test-h3"
+      h3.innerHTML = test_names[i]
+      const h4 = document.createElement("h4")
+      h4.innerHTML = `${course_grades[keys[i]]}%`
+  
+      const input = document.createElement("input")
+      input.type = "text"
+  
+      //Set input field id and name to its key (i.e., test1, test2...)
+      input.id = keys[i]
+      input.name = keys[i]
+      
+      input.oninput = (e)=>{validate_modify_form(e)}
+  
+      //set clear button
+      document.getElementById("clear-grades").onclick = ()=>{clear_popup(course_grades)}
+  
+      //placeholders
+      const ph = document.createElement("div")
+      ph.className = "placeholder"
+      const ph2 = document.createElement("div")
+      ph2.className = "placeholder"
+      const ph3 = document.createElement("div")
+      ph3.className = "placeholder"
+  
+      const percent = document.createElement('h4')
+      percent.innerHTML = "%"
+  
+      //Hidden input field to pass the course code to POST
+      const hidden_field = document.createElement("input")
+      hidden_field.type = "hidden"
+      hidden_field.name = "course-code"
+      hidden_field.value = course_grades.courseCode
+  
+      const div = document.createElement("div")
+      div.className = "row"
+      div.appendChild(ph)
+      div.appendChild(h3)
+      div.appendChild(h4)
+      div.appendChild(ph3)
+      div.appendChild(input)
+      div.appendChild(percent)
+      div.appendChild(ph2)
+      div.appendChild(hidden_field)
+  
+      document.getElementById("popup-tests").appendChild(div)
+    }
+  
+    //show the popup and blur effect
+    document.getElementById("modify-course").hidden = false;
+    document.getElementById("blur").hidden = false;
+  }
+  
+  /**
+   * Close modify course popup and destroy children
+   */
+  function close_modify_course() {
+    document.getElementById("modify-course").classList.remove("modify-course");
+  
+    document.getElementById("modify-course").hidden = true;
+    document.getElementById("blur").hidden = true;
+  
+    const div = document.getElementById("popup-tests")
+    while(div.firstChild){
+      div.removeChild(div.lastChild)
+    }
+  
+  }
+  
+  /**
+   * Validate the update course grade form input
+   * Makes sure that input is only numbers between [0, 100]
+   * @param {Event} e 
+   */
+  function validate_modify_form(e){
+    
+    e.target.value = e.target.value.trim()
+  
+    //if input is: not a number or not in range [0,100]
+    if(isNaN(e.target.value) || Number(e.target.value) < 0 || Number(e.target.value) >100){
+      //remove value that was just added
+      e.target.value = e.target.value.replace(e.data, "")
+    }
+  }
+  
+  /**
+   * Function for clear button on popup form
+   * 
+   * @param {object} course_code    - associative array of course grades
+   *                                 keys: "courseCode", "test1", "test2", "test3", "finalExam"
+   */
+  function clear_popup(course_grades){
+    keys = Object.keys(course_grades);
+    //clear value of all inputs on form
+    for (let i = 2; i < keys.length; i++) {
+      document.getElementById(keys[i]).value = ""
+    }
+  }
